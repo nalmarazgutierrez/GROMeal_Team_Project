@@ -8,15 +8,6 @@ import ProgressBar from '../components/ProgressBar';
 import Api from '../helpers/Api';
 import { jsPDF } from "jspdf";
 
-
-const API_KEY = "5e24157871f640c684861272be1907c9";
-const ISA_KEY = "0fe1d39b2dbf4cb5a8737ca807512217";
-const ANAMARI_KEY = "ed26cdd2c2ed48398cc8d8d88a1b8782";
-const ANAMARI_KEY2 = "02d7327dca734133ac458e767e8373b3";
-const ANAMARI_KEY3 = "44cd6e5f97844750bb59d8bb5f69370d";
-const ANAMARI_KEY4 = "2249a308392d4fefb388c16c01db781a";
-
-
 function ShoppingListView() {
 
     const [recipes, setRecipes] = useState([]);
