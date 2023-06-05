@@ -38,12 +38,10 @@ const EMPTY_PLAN = {
 
 function App() {
 
-
     const [plans, setPlans] = useState([]);
     const [user, setUser] = useState(Local.getUser());
     const [loginErrorMsg, setLoginErrorMsg] = useState('');
     const [userPlans, setUserPlans] = useState([]);
-    const [warning, setWarning] = useState([]);
     const navigate = useNavigate();
     const [planRecipes, setPlanRecipes] = useState([]);
     const [recipes, setRecipes] = useState([]);
@@ -54,41 +52,31 @@ function App() {
     const [newPlan, setNewPlan] = useState(EMPTY_PLAN);
     const [editingPlan, setEditingPlan] = useState(null);
     const [warning, setWarning] = useState([]);
+    const [addedItems, setAddedItems] = useState([]);
+    let [newList] = useState([]);
 
-    let recipesObject = { warning, setWarning, user, editingPlan, setEditingPlan, userPlans, setUserPlans, getUserPlans, newPlan, setNewPlan, recipes, setRecipes, setPlans, editingRecipeId, setEditingRecipeId, featVisible, setfeatVisible, setFeatRecipe, showFeatRecipe, setAddedRecipe, planRecipes, updatePlanRecipes:(planRecipes) => setPlanRecipes(planRecipes), addedRecipe, featRecipe };
+    let recipesObject = { newList, addedItems, setAddedItems, warning, setWarning, user, editingPlan, setEditingPlan, userPlans, setUserPlans, getUserPlans, newPlan, setNewPlan, recipes, setRecipes, setPlans, editingRecipeId, setEditingRecipeId, featVisible, setfeatVisible, setFeatRecipe, showFeatRecipe, setAddedRecipe, planRecipes, updatePlanRecipes:(planRecipes) => setPlanRecipes(planRecipes), addedRecipe, featRecipe };
 
     useEffect(() => {
         getUserPlans();
       }, []);
-    
-    // Get All plans of the app
-//     async function getPlans() {
-  
-//     try {
-//       let response = await fetch(`/api/allplans`);
-//       if (response.ok) {
-//           let plans = await response.json();
-//           setPlans(plans);
-//           console.log(plans);
-//       } else {
-//           console.log(`Server error: ${response.status} ${response.statusText}`);
-//       }
-//   } catch (err) {
-//       console.log(`Server error: ${err.message}`);
-//   }
-//   }
 
-    //WORKING 
     //FUNCTION TO CLICK ON RECIPE, VISUALIZE RECIPE ON TOP & ADDS RECIPE'S DATA TO CONST addedRecipe
     function showFeatRecipe(id){
         let selectedRecipe = recipes.find(r => r.id === id);
         setFeatRecipe(selectedRecipe);
-        // const [reloadRecipe, setReloadRecipes] = useState([]);
-        // console.log(selectedRecipe.title);
+        // let ingredients = selectedRecipe.extendedIngredients;
+        // let ingredientList = []
+        // console.log(ingredients);
+        // console.log(ingredients[0].name);
+        // for(let i=0; i<= ingredients.length; i++){
+        //     // console.log(ingredients[i].name)
+        //     ingredientList += ingredients[i].name;
+        //     // console.log(ingredientList);
+        // }
+        // console.log(ingredientList);
         setAddedRecipe((addedRecipe) => ({...addedRecipe, API_id: selectedRecipe.id, recipe_title: selectedRecipe.title, recipe_image: selectedRecipe.image}));
     };
-    
-    
     
     async function doLogin(username, password) {
         let myresponse = await Api.loginUser(username, password);
