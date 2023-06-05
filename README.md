@@ -26,3 +26,8 @@ DB_PASS=****
 
 - Run `npm start` in project directory (my-express-app) to start the Express server on port 5000
 - In another terminal, do `cd client` and run `npm start` to start the client in development mode with hot reloading in port 3000.
+
+### DEMO TIME
+
+https://github.com/nalmarazgutierrez/GROMeal_Team_Project/assets/113330261/b51446cc-2531-44aa-9646-36bba2c72dda
+
