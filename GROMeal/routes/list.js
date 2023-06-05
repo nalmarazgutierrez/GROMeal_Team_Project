@@ -26,15 +26,17 @@ router.get("/:planId", async function(req, res, next) {
  //POST A NEW ITEM
  router.post("/:planId", async (req, res, next) => {
   let list = req.body;
+  console.log(list);
   let planId = req.params.planId;
-  let sql = `INSERT INTO list (item_name, amount, unit, plan_id)
-  VALUES `
-    for (let i = 0; i < list.length; i++) {
-    if (i === list.length-1) {
-    sql += `("${list[i].item_name}", ${list[i].amount}, "${list[i].unit}", ${planId});`;
-    } else {
-    sql += `("${list[i].item_name}", ${list[i].amount}, "${list[i].unit}", ${planId}), `;
-    }
+  // let sql = `INSERT INTO list (item_name, amount, unit, plan_id) VALUES ("${list.item_name}", ${list.amount}, "${list.unit}", ${planId});`
+  let sql = `INSERT INTO list (item_name, amount, unit, plan_id) VALUES`
+  for (let i = 0; i < list.length; i++) {
+      // sql += `("${list[i].item_name}", ${list[i].amount}, "${list[i].unit}", ${planId});`;
+      if (i === list.length-1) {
+      sql += `("${list[i].item_name}", ${list[i].amount}, "${list[i].unit}", ${planId});`;
+      } else {
+      sql += `("${list[i].item_name}", ${list[i].amount}, "${list[i].unit}", ${planId}), `;
+      }
   }
   console.log(sql);
   
@@ -49,16 +51,37 @@ router.get("/:planId", async function(req, res, next) {
 });
 
 //DELETE an item
-router.delete("/:planId/:id", async (req, res, next) => {
-  let index = req.params.id;
+// router.delete("/:planId/:id", async (req, res, next) => {
+//   let index = req.params.id;
+//   let planId = req.params.planId;
+
+//   try {
+//       let result = await db(`SELECT * FROM list WHERE id = ${index}`);
+//       if (result.data.length === 0) {
+//           res.status(404).send({ error: 'Item not found' });
+//       } else {
+//           await db(`DELETE FROM list WHERE id = ${index}`);
+//           let result = await db(`SELECT * FROM list WHERE plan_id = ${planId}`);
+//           let recipes = result.data;
+//           res.send(recipes);
+//       } 
+//   } catch (err) {
+//       res.status(500).send({ error: err.message });
+//   }
+// });
+
+
+//DELETE an item
+router.delete("/:planId/:item_name", async (req, res, next) => {
+  let name = req.params.item_name;
   let planId = req.params.planId;
 
   try {
-      let result = await db(`SELECT * FROM list WHERE id = ${index}`);
+      let result = await db(`SELECT * FROM list WHERE item_name = '${name}'`);
       if (result.data.length === 0) {
           res.status(404).send({ error: 'Item not found' });
       } else {
-          await db(`DELETE FROM list WHERE id = ${index}`);
+          await db(`DELETE FROM list WHERE item_name = '${name}'`);
           let result = await db(`SELECT * FROM list WHERE plan_id = ${planId}`);
           let recipes = result.data;
           res.send(recipes);
@@ -67,6 +90,5 @@ router.delete("/:planId/:id", async (req, res, next) => {
       res.status(500).send({ error: err.message });
   }
 });
-
    
 module.exports = router;
