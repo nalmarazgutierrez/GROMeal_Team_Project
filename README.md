@@ -14,8 +14,8 @@
 ```bash
 DB_HOST=localhost
 DB_NAME=gromeal
-DB_USER=root
-DB_PASS=root
+DB_USER=****
+DB_PASS=****
 ```
 
 - Run `npm run migrate` in the project folder of this repository (GROMEAL), in a new terminal window. This will create 3 tables called 'users', 'plans' and 'recipes' in your database.
