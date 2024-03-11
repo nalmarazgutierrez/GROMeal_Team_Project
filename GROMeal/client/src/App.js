@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink, Route, Routes, useNavigate } from 'react-router-dom';
 import './App.css';
-
 import Local from './helpers/Local';
 import Api from './helpers/Api';
-
 import NavBar from './components/NavBar';
-
 import PrivateRoute from './components/PrivateRoute';
 import LoginView from './views/LoginView';
 import ErrorView from './views/ErrorView';
@@ -20,7 +17,6 @@ import WeekPlanView from './views/WeekPlanView';
 import ProfileView from './views/ProfileView';
 import RegisterView from './views/RegisterView';
 //import AddPlanForm from './components/AddPlanForm';
-
 import RecipesContext from "./components/RecipesContext";
 
 const EMPTY_FORM = {
@@ -61,7 +57,7 @@ function App() {
         getUserPlans();
       }, []);
 
-    //FUNCTION TO CLICK ON RECIPE, VISUALIZE RECIPE ON TOP & ADDS RECIPE'S DATA TO CONST addedRecipe
+    //FUNCTION TO CLICK ON RECIPE, VISUALIZE RECIPE ON TOP & ADD RECIPE'S DATA TO addedRecipe
     function showFeatRecipe(id){
         let selectedRecipe = recipes.find(r => r.id === id);
         setFeatRecipe(selectedRecipe);
@@ -94,7 +90,6 @@ function App() {
     function doLogout() {
         Local.removeUserInfo();
         setUser(null);
-        // (NavBar will send user to home page)
     }
  
       // Get All plans of the user
@@ -120,7 +115,6 @@ function App() {
         
             <NavBar user={user} logoutCb={doLogout} />
             
-            
             <div>
             <RecipesContext.Provider value={recipesObject}>
                 <Routes>
@@ -137,7 +131,6 @@ function App() {
                             <OldPlansView plans={plans}/>
                         </PrivateRoute>
                     } />
-
 
                     <Route path="/login" element={
                         <LoginView 
@@ -170,8 +163,5 @@ function App() {
         </div>
     );
 }
-
-
-
 
 export default App;
